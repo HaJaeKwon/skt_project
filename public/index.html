@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- META -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
+
+	<title>Node/Angular Todo App</title>
+
+	<!-- SCROLLS -->
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
+	<style>
+		html 					{ overflow-y:scroll; }
+		body 					{ padding-top:50px; }
+		#todo-list 				{ margin-bottom:30px; }
+		.navbar .navbar-contents	{ padding-top: 20px; }
+	</style>
+
+	<!-- SPELLS -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
+	<!-- Angular Material requires Angular.js Libraries -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+
+  <!-- Angular Material Library -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+	<script src="angular-ui-router.js"></script>
+	<script src="angular-ui-bootstrap-tpls-2.5.0.js"></script>
+	<script src="core.js"></script>
+
+	<link rel="stylesheet" href="awesomplete.css">
+	<script src="awesomplete.js" async></script>
+
+	<link rel="stylesheet" href="buttons.css">
+
+	<script type="text/javascript">
+		$(function() {
+			$("#artist-name").keyup(function(e) {
+				if(e.keyCode == 13) goSearch();
+			});
+			var goSearch = function() {
+				var name = $("#artist-name").val();
+				//console.log(name);
+				//location.href = "artists?name=" + name;
+			};
+
+		});
+	</script>
+
+</head>
+<body ng-app="mangoApp" style="padding-top: 0px;">
+	
+	<nav class="navbar " role="navigation" style="margin-bottom:0px; border-radius: 0px; height:90px;">
+		<div class="navbar-header navbar-contents">
+			<a class="navbar-brand" href="/" style="margin-left:100px; font-size: 40px;">InviTe</a>
+		</div>
+		<ul class="nav navbar-nav navbar-contents" style="float:right; margin-right:100px;">
+			<li><a ui-sref="home">Home</a></li>
+			<li><a ui-sref="about">About</a></li>
+		</ul>
+		<div class="navbar-contents ui-widget" style="float: right; text-align: center; margin-right: 200px; margin-top: 15px;">
+			<input id="artist-name" class="awesomplete"
+       data-list="Honne, Gallant, Bigbang, Maroon5, Drake, Cold Play" ng-model="name"/>
+       		<a ui-sref="artists({name:name})"><img id="search" src="../images/icon-search.png" style="height: 30px; width: 30px;"></a>
+		</div>
+	</nav>
+
+	<div class="container" style="padding:0px; margin:0px; max-width: 2000px;">
+		<div ui-view></div>
+	</div>
+
+	<div class="text-center">
+    	<p>A tutorial by <a href="http://scotch.io" target="_blank">scotch.io</a></p>
+    	<p>View the tutorial: <a href="http://scotch.io/tutorials/javascript/angular-routing-using-ui-router" target="_blank">AngularJS Routing using UI-Router</a></p>
+    </div>
+
+</body>
+</html>

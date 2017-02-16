@@ -1,0 +1,38 @@
+<div style="height: 1000px;">
+  <div class="div_content1" style="height:450px; margin-left: 150px;">
+    <div class="div_artist" style="height:450px; float: left;">
+      <div class="div_name" style="height:100px; width:450px; padding-top: 25px; padding-left: 30px; font-size: 30px">
+        <p  font-family="Roboto Condensed" style="font-size: 34px; font-weight:bold; text-transform: uppercase; -webkit-font-smoothing:antialiased">{{artist.name}}</p>
+      </div>
+      <div class="div_profile" style="margin: 10px; float: left;">
+        <img src="../images/profile_{{name}}.jpg" style="height:300px; width:300px; object-fit: fill; border-radius: 100%;">
+      </div>
+      <div class="div_info" style="width:250px; margin-left:50px; float: left;">
+        <div style="margin-top: 40px; padding-left: 12px; height: 180px; border-left: 4px solid #BDC2C7; vertical-align: top; text-align: left;">
+          <p style="margin-bottom: 28px;">
+            <span id="city_count" font-family="Roboto Condensed" style="font-size: 34px; font-weight:bold; display: block;">
+              {{artist.city}}
+            </span>
+            Cities
+          </p>
+          <p>
+            <span id="request_count" font-family="Roboto Condensed" style="font-size: 34px; font-weight:bold; display: block;">
+              {{artist.totalPoint}}
+            </span>
+            Total InviTe Counts
+          </p>
+        </div>
+      </div>
+    </div>
+    <div ng-init="isInviteStart" class="div_invite" style="height:450px; width:400px; float: left;">
+      <a id="buttn_invite" ng-hide="isInviteStart" ng-click="inviteStart()" class="ng-hide button button-3d button-primary button-pill" style="font-size: 24px; margin-top: 250px; margin-left: 50px;">InviTe</a>
+      <div ng-show="isInviteStart" style="margin-top: 250px;">
+        <h3>Invite Point
+          <button type="button" class="btn btn-sm btn-primary" ng-click="clickInvite()">LIKE INVITE</button>
+        </h3>
+        <uib-progressbar max="invite.max" value="invite.cur"><span style="color:white; white-space:nowrap;">{{invite.cur}} / {{invite.max}}</span></uib-progressbar>
+      </div>
+    </div>
+  </div>
+  <div class="div_content2" style="height:550px;"></div>
+</div>
