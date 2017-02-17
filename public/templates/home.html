@@ -1,30 +1,27 @@
-<!-- HEADER AND TODO COUNT -->
-<div class="jumbotron text-center">
-	<h1>I'm a Todo-aholic <span class="label label-info">{{ todos.length }}</span></h1>
+<div style="height: 405px">
+  <div id="slide" uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
+    <div uib-slide ng-repeat="slide in slides" index="slide.id">
+      <img ng-src="{{slide.image}}" style="height:400px; width:100%; object-fit:fill">
+      <div class="carousel-caption">
+        <h4>Slide {{slide.id}}</h4>
+        <p>{{slide.text}}</p>
+      </div>
+    </div>
+  </div>
 </div>
-
-<!-- TODO LIST -->
-<div id="todo-list" class="row">
-	<div class="col-sm-4 col-sm-offset-4">
-			<!-- LOOP OVER THE TODOS IN $scope.todos -->
-		<div class="checkbox" ng-repeat="todo in todos">
-			<label>
-				<input type="checkbox" ng-click="deleteTodo(todo._id)"> {{ todo.text }}
-			</label>
-		</div>
-	</div>
-</div>
-
-<!-- FORM TO CREATE TODOS -->
-<div id="todo-form" class="row">
-	<div class="col-sm-8 col-sm-offset-2 text-center">
-		<form>
-			<div class="form-group">
-					<!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
-				<input type="text" class="form-control input-lg text-center" placeholder="I want to buy a puppy that will love me forever" ng-model="formData.text">
-			</div>
-				<!-- createToDo() WILL CREATE NEW TODOS -->
-			<button type="submit" class="btn btn-primary btn-lg" ng-click="createTodo()">Add</button>
-		</form>
-	</div>
+<div class="row" style="margin:15px;">
+  <div class="col-md-6">
+    <button type="button" class="btn btn-info" ng-click="addSlide()">Add Slide</button>
+    <button type="button" class="btn btn-info" ng-click="randomize()">Randomize slides</button>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" ng-model="noWrapSlides">
+        Disable Slide Looping
+      </label>
+    </div>
+  </div>
+  <div class="col-md-6">
+    Interval, in milliseconds: <input type="number" class="form-control" ng-model="myInterval">
+    <br />Enter a negative number or 0 to stop the interval.
+  </div>
 </div>

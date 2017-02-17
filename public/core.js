@@ -27,49 +27,7 @@ mangoApp.config(function($stateProvider, $urlRouterProvider) {
 });
 
 mangoApp.controller('homeController', function mainController($scope, $http, $state) {
-	$scope.formData = {};
-
-	$http({
-		method:'GET',
-		url:'api/todos'
-	}).then(function(res) {
-		$scope.todos = res.data;
-		console.log(res.data);
-	}, function(err) {
-		console.log('Error: ' + err);
-	});
-
-	// when submitting the add form, send the text to the node API
-	$scope.createTodo = function() {
-		$http({
-			method:'POST',
-			url:'api/todos',
-			data:$scope.formData
-		}).then(function(res) {
-			$scope.formData = {}; // clear the form so our user is ready to enter another
-			$scope.todos = res.data;
-			console.log(res.data);
-		}, function(err) {
-			console.log('Error: ' + err);
-		});
-	};
-
-	// delete a todo after checking it
-	$scope.deleteTodo = function(id) {
-		$http({
-			method:'DELETE',
-			url:'api/todos/' + id
-		}).then(function(res) {
-			$scope.todos = res.data;
-			console.log(res.data);
-		}, function(err) {
-			console.log('Error: ' + err);
-		});
-	};
-});
-
-mangoApp.controller('aboutController', function aboutController($scope, $http) {
-	$scope.myInterval = 5000;
+	$scope.myInterval = 3000;
   $scope.noWrapSlides = false;
   $scope.active = 0;
   var slides = $scope.slides = [];
@@ -126,6 +84,49 @@ mangoApp.controller('aboutController', function aboutController($scope, $http) {
   }
 });
 
+mangoApp.controller('aboutController', function aboutController($scope, $http, $state) {
+	
+	$scope.formData = {};
+
+	$http({
+		method:'GET',
+		url:'api/todos'
+	}).then(function(res) {
+		$scope.todos = res.data;
+		console.log(res.data);
+	}, function(err) {
+		console.log('Error: ' + err);
+	});
+
+	// when submitting the add form, send the text to the node API
+	$scope.createTodo = function() {
+		$http({
+			method:'POST',
+			url:'api/todos',
+			data:$scope.formData
+		}).then(function(res) {
+			$scope.formData = {}; // clear the form so our user is ready to enter another
+			$scope.todos = res.data;
+			console.log(res.data);
+		}, function(err) {
+			console.log('Error: ' + err);
+		});
+	};
+
+	// delete a todo after checking it
+	$scope.deleteTodo = function(id) {
+		$http({
+			method:'DELETE',
+			url:'api/todos/' + id
+		}).then(function(res) {
+			$scope.todos = res.data;
+			console.log(res.data);
+		}, function(err) {
+			console.log('Error: ' + err);
+		});
+	};
+});
+
 mangoApp.controller('artistDetailController', function aboutController($scope, $http, $state, $stateParams) {
 	var artists = $scope.artists = [];
 	artists.push({"name":"Maroon5", "cites":32, "total-invite-count":128303, "is-invite":false, "current-invite-count":0});
@@ -134,6 +135,7 @@ mangoApp.controller('artistDetailController', function aboutController($scope, $
 	console.log('name : ' + name);
 
 	var maxPoint = 20;
+	$scope.isInviteSuccess = false;
 
 	$scope.inviteStart = function() {
 		$scope.isInviteStart = true;
@@ -180,6 +182,17 @@ mangoApp.controller('artistDetailController', function aboutController($scope, $
 		url:'api/artist/get/' + name
 	}).then(function(res) {
 		$scope.artist = res.data.data;
+		$scope.imageList = [];
+
+		for(var i=0; i<3; i++) {
+			$scope.imageList.push({
+		      src: $scope.artist.img[i],
+		      text: ['Nice image','Awesome photograph','That is so cool','I love that'][3 % 4],
+		      id: i
+		    });
+		}
+
+		console.log('imageList : ' + $scope.imageList[0].image);
 		console.log('res : ' + res.data.data);
 	}, function(err) {
 		console.log('Error: ' + err);
@@ -207,7 +220,12 @@ mangoApp.controller('artistDetailController', function aboutController($scope, $
 			if(res.data.data!='') {
 				$scope.isInviteStart = true;
 				$scope.invite = res.data.data;
-				setTimeout(loopFunc(), 1000);
+
+				if($scope.invite.cur >= $scope.invite.max) {
+					$scope.isInviteSuccess = true;
+				} else {
+					setTimeout(loopFunc(), 1000);
+				}
 			}
 		}, function(err) {
 			console.log('Error: ' + err);

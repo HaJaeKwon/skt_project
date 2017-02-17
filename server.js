@@ -23,10 +23,24 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+var allowCORS = function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+  (req.method === 'OPTIONS') ?
+    res.send(200) :
+    next();
+};
+ 
+// 이 부분은 app.use(router) 전에 추가하도록 하자
+app.use(allowCORS);
+
 var Artist = mongoose.model('Artist', {
 	name : String,
 	city : Number,
-	totalPoint : Number
+	totalPoint : Number,
+	img: Array,
+	musicList: Array
 });
 
 app.get('/api/artist/getAll', function(req, res) {
@@ -56,7 +70,9 @@ app.post('/api/artist/insert', function(req, res) {
 	Artist.create({
 		name : req.body.name,
 		city : req.body.city,
-		totalPoint : req.body.totalPoint
+		totalPoint : req.body.totalPoint,
+		img : req.body.img,
+		musicList : req.body.musicList
 	}, function(err, artist) {
 		if (err) return res.send({success:false, message: err});
 
@@ -155,5 +171,7 @@ app.get('*', function(req, res) {
 	res.sendfile('./public/index.html');
 });
 
+//app.listen(process.env.PORT, process.env.IP);
+//console.log("App listening on port " + process.env.PORT);
 app.listen(9000);
 console.log("App listening on port 9000");

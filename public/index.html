@@ -19,13 +19,13 @@
 	<!-- SPELLS -->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
 	<!-- Angular Material requires Angular.js Libraries -->
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
 
-  <!-- Angular Material Library -->
-  <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+	<!-- Angular Material Library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
 	<script src="angular-ui-router.js"></script>
 	<script src="angular-ui-bootstrap-tpls-2.5.0.js"></script>
 	<script src="core.js"></script>
@@ -34,6 +34,9 @@
 	<script src="awesomplete.js" async></script>
 
 	<link rel="stylesheet" href="buttons.css">
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
+
+	<script src="https://unpkg.com/scrollreveal@3.3.2/dist/scrollreveal.min.js"></script>
 
 	<script type="text/javascript">
 		$(function() {
@@ -42,10 +45,15 @@
 			});
 			var goSearch = function() {
 				var name = $("#artist-name").val();
+
 				//console.log(name);
 				//location.href = "artists?name=" + name;
 			};
-
+			var revealEvent = function() {
+				window.sr = ScrollReveal({ duration: 2000 });
+				sr.reveal(document.getElementById('container'), 50);	
+			};
+			revealEvent();
 		});
 	</script>
 
@@ -54,9 +62,10 @@
 	
 	<nav class="navbar " role="navigation" style="margin-bottom:0px; border-radius: 0px; height:90px;">
 		<div class="navbar-header navbar-contents">
-			<a class="navbar-brand" href="/" style="margin-left:100px; font-size: 40px;">InviTe</a>
+			<a class="navbar-brand" href="/" style="margin-left:120px; font-size: 40px; padding: 0px;"><img src="/images/title.png" style="height: 60px;"></a>
 		</div>
 		<ul class="nav navbar-nav navbar-contents" style="float:right; margin-right:100px;">
+			<li><a ui-sref="/">Login</a></li>
 			<li><a ui-sref="home">Home</a></li>
 			<li><a ui-sref="about">About</a></li>
 		</ul>
@@ -67,7 +76,7 @@
 		</div>
 	</nav>
 
-	<div class="container" style="padding:0px; margin:0px; max-width: 2000px;">
+	<div id="container" class="container" style="padding:0px; margin:0px; max-width: 2000px;">
 		<div ui-view></div>
 	</div>
 

@@ -5,13 +5,14 @@
   "main": "server.js",
   "author": "Scotch",
   "dependencies": {
+    "angular-image-reveal": "^1.0.1",
     "angular-ui-bootstrap": "^2.5.0",
     "body-parser": "~1.15.2",
     "cookie-parser": "~1.4.3",
     "debug": "~2.2.0",
     "express": "~4.14.0",
+    "mongoose": "^4.4.16",
     "morgan": "~1.7.0",
-    "serve-favicon": "~2.3.0",
-    "mongoose": "^4.4.16"
+    "serve-favicon": "~2.3.0"
   }
 }
