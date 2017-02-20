@@ -1,0 +1,113 @@
+<style type="text/css">
+  .tabsdemoDynamicHeight md-content {
+    background-color: transparent !important; }
+    .tabsdemoDynamicHeight md-content md-tabs {
+      background: #f6f6f6;
+      border: 1px solid #e1e1e1; }
+      .tabsdemoDynamicHeight md-content md-tabs md-tabs-wrapper {
+        background: white; }
+    .tabsdemoDynamicHeight md-content h1:first-child {
+      margin-top: 0; }
+</style>
+
+<div style="height: 1000px; border-top:3px solid hsla(0,0%,0%,.2); padding:100px; margin-top:20px; padding-top: 20px;">
+  <div class="div_content1" style="height:400px;">
+    <div class="div_content11" style="height:400px; width:540px; position: fixed;">
+      <img src="../images/icon_list.png" style="position: fixed; top: 50px; left: 120px; height: 50px; width: 50px;">
+      <p font-family="Roboto Condensed" style="font-size: 34px; font-weight:bold; text-transform: uppercase; -webkit-font-smoothing:antialiased; position: relative; top:10px; left: 80px;">PROMOTER</p>
+      <div ng-cloak="" class="tabsdemoDynamicHeight" style="margin: 15px; padding-top: 5px;">
+        <md-content>
+          <md-tabs md-dynamic-height md-border-bottom>
+            <md-tab label="TRENDING">
+              <md-content class="md-padding" style="padding: 5px;">
+                <md-list-item class="md-3-line" ng-repeat="item in artistList" ng-click="null ">
+                  <img ng-src="{{item.profile}}?{{$index}}" class="md-avatar" alt="{{item.profile}}" ng-click="selectArtist(item)" />
+                  <div class="md-list-item-text" layout="column" ng-click="selectArtist(item)">
+                    <h3>{{ item.name }}</h3>
+                    <p>{{ item.city }}</p>
+                  </div>
+                  <h3>{{ item.totalCount }}</h3>
+                </md-list-item>
+              </md-content>
+            </md-tab>
+            <md-tab label="GLOBAL">
+              <md-content class="md-padding" style="padding: 5px;">
+                <md-list-item class="md-3-line" ng-repeat="item in artistList" ng-click="null">
+                  <img ng-src="{{item.profile}}?{{$index}}" class="md-avatar" alt="{{item.profile}}" />
+                  <div class="md-list-item-text" layout="column">
+                    <h3>{{ item.name }}</h3>
+                    <p>{{ item.city }}</p>
+                  </div>
+                </md-list-item>
+              </md-content>
+            <md-tab label="YOUR CITY">
+              <md-content class="md-padding" style="padding: 5px;">
+                <md-list-item class="md-3-line" ng-repeat="item in artistList" ng-click="null">
+                  <img ng-src="{{item.profile}}?{{$index}}" class="md-avatar" alt="{{item.profile}}" />
+                  <div class="md-list-item-text" layout="column">
+                    <h3>{{ item.name }}</h3>
+                    <p>{{ item.city }}</p>
+                  </div>
+                </md-list-item>
+              </md-content>
+            </md-tab>
+          </md-tabs>
+        </md-content>
+      </div>
+    </div>
+    <div class="div_content12" style="height:400px; width:540px; position: relative; left: 540px;">
+      <iframe ng-hide={{isStep2}} id="ytplayer" type="text/html" width="640" height="360" src="http://www.youtube.com/embed/qh7BCluk3wc?autoplay=1&origin=http://example.com" frameborder="0"/>
+      <div ng-show={{isStep2}}>
+        
+      </div>
+    </div>
+  </div>
+  <div class="div_content2" style="margin: 1em; vertical-align: middle; text-align: center; margin: 10px;">
+    <a href="" ng-click="gotoElement('step2')" class="button button-3d button-primary button-rounded" style="font-size: 30px;">{{artist.name}}를 INVITE 하세요 !</a>
+  </div>
+  <div id="step2" class="div_content3" style="height: 300px; text-align: center;">
+    <div layout-gt-xs="row" style="margin-top: 50px;">
+      <div flex-gt-xs>
+        <h4>INVITE WHEN</h4>
+        <md-datepicker ng-model="ctrl.myDate" md-placeholder="Enter date" md-min-date="ctrl.minDate" md-max-date="ctrl.maxDate"></md-datepicker>
+      </div>
+
+      <div flex-gt-xs style="width: 300px;">
+        <h4>TICKET HOW MUCH</h4>
+        <md-slider-container>
+          <md-slider ng-model="ticketMoney" aria-label="Disabled 1" flex md-discrete ng-readonly="readonly"></md-slider>
+
+          <md-input-container>
+            <input flex type="number" ng-model="ticketMoney" aria-label="green" aria-controls="green-slider">
+            달러
+          </md-input-container>
+        </md-slider-container>
+      </div>
+
+      <div flex-gt-xs ng-controller="DemoCtrl as ctrl">
+        <h4>CONCERT WHERE</h4>
+        <md-autocomplete
+          ng-disabled="ctrl.isDisabled"
+          md-no-cache="ctrl.noCache"
+          md-selected-item="ctrl.selectedItem"
+          md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
+          md-search-text="ctrl.searchText"
+          md-selected-item-change="ctrl.selectedItemChange(item)"
+          md-items="item in ctrl.querySearch(ctrl.searchText)"
+          md-item-text="item.display"
+          md-min-length="0"
+          placeholder="What is your favorite US state?">
+        <md-item-template>
+          <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
+        </md-item-template>
+        <md-not-found>
+          No states matching "{{ctrl.searchText}}" were found.
+        </md-not-found>
+      </md-autocomplete>
+      </div>
+    </div>
+  </div>
+  <div class="div_content3" style="margin: 1em; vertical-align: middle; text-align: center; margin: 10px;">
+    <a href="" ng-click="clickPromote(artist)" class="button button-3d button-primary button-rounded" style="font-size: 30px;">{{artist.name}}를 해당 정보로 PROMOTE 합니다</a>
+  </div>
+</div>

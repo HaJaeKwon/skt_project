@@ -37,7 +37,8 @@ app.use(allowCORS);
 
 var Artist = mongoose.model('Artist', {
 	name : String,
-	city : Number,
+	city : String,
+	cityCount : Number,
 	totalPoint : Number,
 	img: Array,
 	musicList: Array
@@ -70,6 +71,7 @@ app.post('/api/artist/insert', function(req, res) {
 	Artist.create({
 		name : req.body.name,
 		city : req.body.city,
+		cityCount : req.body.cityCount,
 		totalPoint : req.body.totalPoint,
 		img : req.body.img,
 		musicList : req.body.musicList
@@ -99,7 +101,8 @@ app.delete('/api/artist/delete/:name', function(req, res) {
 var Invite = mongoose.model('Invite', {
 	name : String,
 	cur : Number,
-	max : Number
+	max : Number,
+	isPromote : {type:Boolean, default:false}
 });
 
 app.get('/api/invite/getAll', function(req, res) {
@@ -151,6 +154,18 @@ app.put('/api/invite/like/:name', function(req, res) {
 		});
 	});
 })
+
+app.put('/api/invite/promote/:name', function(req, res) {
+	
+	Invite.findOne({name:req.params.name}, function(err, invite) {
+		if(err) return res.status(500).send({success:false, massage:err});
+		invite['isPromote'] = true;
+		invite.save(function(err) {
+			if(err) return res.status(500).send({success:false, message: err});
+			res.json({success:true, data:'updated successfully'});
+		});
+	});
+})
 	// delete a todo
 app.delete('/api/invite/delete/:name', function(req, res) {
 	Invite.remove({
@@ -170,6 +185,36 @@ app.delete('/api/invite/delete/:name', function(req, res) {
 app.get('*', function(req, res) {
 	res.sendfile('./public/index.html');
 });
+
+var Invite2 = mongoose.model('Invite2', {
+	name : String,
+	country : String,
+	profile : String
+});
+
+app.get('/api/invite2/getAll', function(req, res) {
+	Invite2.find(function(err, invite2s) {
+		if (err) return res.send({success:false, message: err});
+		res.json({success:true, data:invite2s});
+	});
+});
+
+app.post('/api/invite2/insert', function(req, res) {
+	Invite2.create({
+		name : req.body.name,
+		country : req.body.country,
+		profile : req.body.profile
+	}, function(err, invite2) {
+		if (err) return res.send({success:false, message: err});
+
+		Invite2.find(function(err, invite2s) {
+			if (err) return res.send({success:false, message: err});
+			res.json({success:true, data:invite2s});
+		});
+	});
+});
+
+
 
 //app.listen(process.env.PORT, process.env.IP);
 //console.log("App listening on port " + process.env.PORT);
