@@ -143,7 +143,10 @@ mangoApp.controller('artistDetailController', function ($scope, $http, $state, $
 	var maxPoint = 20;
 	$scope.isInviteSuccess = false;
 
+	$scope.ticketMoney = 80;
+
 	$scope.inviteStart = function() {
+
 		$scope.isInviteStart = true;
 
 		$http({
@@ -171,6 +174,7 @@ mangoApp.controller('artistDetailController', function ($scope, $http, $state, $
 
 	$scope.clickInvite = function() {
 		if($scope.invite.cur < $scope.invite.max) {
+
 			$http({
 				method:'PUT',
 				url:'api/invite/like/' + name
@@ -238,6 +242,7 @@ mangoApp.controller('artistDetailController', function ($scope, $http, $state, $
 		});
 	};
 	setTimeout(loopFunc(), 1000);
+
 });
 
 mangoApp.controller('promoterController', function ($scope, $http, $state, $stateParams, $location, anchorSmoothScroll, $timeout, $q, $log) {

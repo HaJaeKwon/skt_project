@@ -36,15 +36,27 @@
       </div>
     </div>
     <div style="height:450px; width:400px; float: left;">
-      <div ng-init="isInviteStart" class="div_invite" style="height:320px; padding-top:220px;">
+      <div ng-init="isInviteStart" class="div_invite" style="height:320px; padding-top:50px;">
         <div ng-hide="isInviteSuccess">
           <a id="buttn_invite" ng-hide="isInviteStart" ng-click="inviteStart()" class="ng-hide button button-3d button-primary button-pill" style="font-size: 24px; margin-left: 50px; margin-top: 20px;"> InviTe </a>
           <div ng-show="isInviteStart" style="">
             <h3>Invite Point
               <button type="button" class="btn btn-sm btn-primary" ng-click="clickInvite()">LIKE INVITE</button>
             </h3>
-              <uib-progressbar max="invite.max" value="invite.cur"><span style="color:white; white-space:nowrap;">{{invite.cur}} / {{invite.max}}</span></uib-progressbar>
+           <md-slider-container>
+          <md-slider ng-model="ticketMoney" aria-label="Disabled 1" flex md-discrete ng-readonly="readonly" min="0" max="200"></md-slider>
+
+          <md-input-container>
+            <input flex type="number" ng-model="ticketMoney" aria-label="green" aria-controls="green-slider">
+            달러
+          </md-input-container>
+        </md-slider-container>
+            
+            <uib-progressbar max="invite.max" value="invite.cur"><span style="color:white; white-space:nowrap;">{{invite.cur}} / {{invite.max}}</span></uib-progressbar>
           </div>
+
+
+
         </div>
         <div ng-show="isInviteSuccess">
           <a ng-click="clickBuyTicket()" class="button button-3d button-primary button-pill" style="font-size: 24px; margin-left: 50px; margin-top: 20px;">BUY TICKET</a>
