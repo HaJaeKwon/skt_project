@@ -145,6 +145,8 @@ mangoApp.controller('artistDetailController', function ($scope, $http, $state, $
 
 	$scope.ticketMoney = 80;
 
+	$scope.myDate = new Date('3/1/2017');
+
 	$scope.inviteStart = function() {
 
 		$scope.isInviteStart = true;
@@ -316,7 +318,7 @@ mangoApp.controller('promoterController', function ($scope, $http, $state, $stat
 				if(data[i].cur >= data[i].max) {
 					$http({
 						method:'GET',
-						url:'api/artist/get/'+data[i].name
+						url:'api/artist/get/gallant'
 					}).then(function(res) {
 						$scope.artistList.push({'profile':'../images/profile_gallant0.jpg', 'name':res.data.data.name, 'city':res.data.data.city, 'totalCount':res.data.data.totalPoint});
 					}, function(err) {

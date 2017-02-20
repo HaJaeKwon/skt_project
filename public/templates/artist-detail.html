@@ -60,6 +60,22 @@
         </div>
         <div ng-show="isInviteSuccess">
           <a ng-click="clickBuyTicket()" class="button button-3d button-primary button-pill" style="font-size: 24px; margin-left: 50px; margin-top: 20px;">BUY TICKET</a>
+          <div layout-gt-xs="row" style="margin-top: 50px;">
+            <div flex-gt-xs>
+              <h6>INVITE WHEN</h6>
+              <md-datepicker ng-model="myDate" md-placeholder="Enter date" md-min-date="minDate" md-max-date="maxDate"></md-datepicker>
+            </div>
+
+            <div flex-gt-xs style="width: 300px;">
+              <h6>TICKET</h6>
+              60 달러
+            </div>
+
+            <div flex-gt-xs ng-controller="DemoCtrl as ctrl">
+              <h6>CONCERT</h6>
+              Seoul
+            </div>
+          </div>
         </div>
       </div>
       <div id="buzz_button">
